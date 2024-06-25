@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import s from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
-import { addContacts } from "../../Redux/contactSlice";
+import { addContacts } from "../../redux/contactSlice";
 
 const contactsSchema = Yup.object().shape({
   name: Yup.string()

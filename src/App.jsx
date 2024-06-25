@@ -1,8 +1,8 @@
 import { ContactForm, ContactList, SearchBox } from "./components";
 
 import { useSelector } from "react-redux";
-import { selectContacts } from "./Redux/contactSlice";
-import { selectFilter } from "./Redux/filterSlice";
+import { selectContacts } from "./redux/contactSlice";
+import { selectFilter } from "./redux/filterSlice";
 
 function App() {
   const contacts = useSelector(selectContacts);
