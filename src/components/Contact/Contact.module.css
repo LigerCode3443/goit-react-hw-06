@@ -1,0 +1,32 @@
+.item {
+  position: relative;
+  display: flex;
+  box-shadow: 0 0 2px 2px gold;
+  padding: 15px;
+  border-radius: 5px;
+  flex-direction: column;
+  min-width: 250px;
+  gap: 20px;
+  background-color: rgb(71, 63, 63);
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.btn {
+  position: absolute;
+  border-radius: 50px;
+  padding: 15px;
+  border: 1px solid gold;
+  top: 25%;
+  right: 15px;
+  background-color: rgb(174, 155, 155);
+  color: rgb(87, 81, 44);
+  &:hover {
+    color: black;
+    background-color: gold;
+    border: 1px solid black;
+  }
+}
