@@ -1,48 +1,28 @@
-import { useEffect, useState } from "react";
 import { ContactForm, ContactList, SearchBox } from "./components";
-import contacts from "./data/contacts.json";
-import { nanoid } from "nanoid";
+
+import { useSelector } from "react-redux";
+import { selectContacts } from "./Redux/contactSlice";
+import { selectFilter } from "./Redux/filterSlice";
 
 function App() {
-  const [contactsPhone, setContactsPhone] = useState(() => {
-    const phone = JSON.parse(window.localStorage.getItem("contactsPhone"));
+  const contacts = useSelector(selectContacts);
+  const filterContacts = useSelector(selectFilter);
 
-    if (phone?.length) {
-      return phone;
-    }
-    return contacts;
-  });
-
-  const [search, setSearch] = useState("");
-  useEffect(() => {
-    window.localStorage.setItem("contactsPhone", JSON.stringify(contactsPhone));
-  }, [contactsPhone]);
-  const addContact = (values) => {
-    setContactsPhone((prev) => [...prev, { ...values, id: nanoid() }]);
-  };
-
-  const handleDelete = (id) => {
-    setContactsPhone((prev) => prev.filter((cont) => cont.id !== id));
-  };
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const searchContact = contactsPhone.filter((contact) =>
-    contact.name.toLocaleLowerCase().includes(search)
+  const searchContact = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filterContacts?.toLowerCase())
   );
 
   return (
     <>
-      <ContactForm addContact={addContact} />
-      <SearchBox handleSearch={handleSearch} value={search} />
+      <ContactForm />
+      <SearchBox />
 
-      {contactsPhone.length ? (
-        <ContactList contacts={searchContact} handleDelete={handleDelete} />
+      {contacts.length ? (
+        <ContactList contacts={searchContact} />
       ) : (
         <span className="title">No contact </span>
       )}
-      {searchContact.length === 0 && contactsPhone.length !== 0 && (
+      {searchContact.length === 0 && contacts.length !== 0 && (
         <span className="title">Contact is not defiant</span>
       )}
     </>
